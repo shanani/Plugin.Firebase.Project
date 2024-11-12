@@ -35,7 +35,7 @@
             <string>Bundle ID</string>
             <key>CFBundleURLSchemes</key>
             <array>
-                <string>com.tobishiba.playground</string>
+                <string>com.me.real_estate</string>
                 <string>com.googleusercontent.apps.537235599720-hcksm71pdop66skvs74a9g4arnvs0j58</string>
                 <string>fb151743924915235</string>
             </array>

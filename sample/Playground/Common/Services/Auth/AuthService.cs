@@ -38,13 +38,35 @@ public sealed class AuthService : IAuthService
     private IObservable<Unit> RunAuthTask(Task<IFirebaseUser> task, bool signOutWhenFailed = false)
     {
         _isSignInRunningSubject.OnNext(true);
+
         return Observable
             .FromAsync(_ => task)
-            .Do(_currentUserSubject.OnNext)
+            .Do(user => {
+                _currentUserSubject.OnNext(user);
+                Console.WriteLine($"User signed in successfully: {user?.Uid}");
+            })
             .ToUnit()
-            .Catch<Unit, Exception>(e => (signOutWhenFailed ? SignOut() : Observables.Unit).SelectMany(Observable.Throw<Unit>(e)))
-            .Finally(() => _isSignInRunningSubject.OnNext(false));
+            .Catch<Unit, Exception>(e => {
+                // Log the exception for better traceability
+                Console.WriteLine($"An error occurred during sign-in: {e.Message}");
+                Console.WriteLine($"Stack Trace: {e.StackTrace}");
+
+                // Log additional details if required
+                if(e.InnerException != null) {
+                    Console.WriteLine($"Inner Exception: {e.InnerException.Message}");
+                    Console.WriteLine($"Inner Stack Trace: {e.InnerException.StackTrace}");
+                }
+
+                // Optionally sign out if the flag is set
+                return (signOutWhenFailed ? SignOut() : Observables.Unit)
+                    .SelectMany(Observable.Throw<Unit>(e));
+            })
+            .Finally(() => {
+                _isSignInRunningSubject.OnNext(false);
+                Console.WriteLine("Sign-in process completed.");
+            });
     }
+
 
     public IObservable<Unit> SignInWithEmailAndPassword(string email, string password)
     {
@@ -135,8 +157,8 @@ public sealed class AuthService : IAuthService
         var settings = new ActionCodeSettings();
         settings.Url = "https://playground-24cec.firebaseapp.com";
         settings.HandleCodeInApp = true;
-        settings.IOSBundleId = "com.tobishiba.playground";
-        settings.SetAndroidPackageName("com.tobishiba.playground", true, "21");
+        settings.IOSBundleId = "com.me.real_estate";
+        settings.SetAndroidPackageName("com.me.real_estate", true, "21");
         return settings;
     }
 

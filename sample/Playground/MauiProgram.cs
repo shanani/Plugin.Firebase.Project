@@ -18,6 +18,8 @@ using Plugin.Firebase.DynamicLinks;
 using Plugin.Firebase.Functions;
 using Plugin.Firebase.RemoteConfig;
 using Plugin.Firebase.Bundled.Shared;
+using Firebase;
+
 #if IOS
 using Plugin.Firebase.Bundled.Platforms.iOS;
 using Playground.Platforms.iOS.Services.UserInteraction;
@@ -75,6 +77,7 @@ public static class MauiProgram
                 return false;
             }));
 #elif ANDROID
+          
             events.AddAndroid(android => android.OnCreate((activity, _) => {
                 var settings = CreateCrossFirebaseSettings();
                 CrossFirebase.Initialize(activity, settings);
@@ -125,6 +128,6 @@ public static class MauiProgram
             isFunctionsEnabled: true,
             isRemoteConfigEnabled: true,
             isStorageEnabled: true,
-            googleRequestIdToken: "537235599720-723cgj10dtm47b4ilvuodtp206g0q0fg.apps.googleusercontent.com");
+            googleRequestIdToken: "490692470858-pvedsdgr2uckkei6bnr1fpk409h63jng.apps.googleusercontent.com");
     }
 }

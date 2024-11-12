@@ -104,20 +104,12 @@
       <AndroidSigningStorePass>android</AndroidSigningStorePass>
       <AndroidSigningKeyAlias>androiddebugkey</AndroidSigningKeyAlias>
       <AndroidSigningKeyPass>android</AndroidSigningKeyPass>
-      <ApplicationTitle>Real Estate New</ApplicationTitle>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0-android|AnyCPU'">
       <AndroidKeyStore>True</AndroidKeyStore>
       <AndroidSigningStorePass>android</AndroidSigningStorePass>
       <AndroidSigningKeyAlias>androiddebugkey</AndroidSigningKeyAlias>
       <AndroidSigningKeyPass>android</AndroidSigningKeyPass>
-      <ApplicationTitle>Real Estate New</ApplicationTitle>
-    </PropertyGroup>
-    <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0-ios|AnyCPU'">
-      <ApplicationTitle>Real Estate New</ApplicationTitle>
-    </PropertyGroup>
-    <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0-ios|AnyCPU'">
-      <ApplicationTitle>Real Estate New</ApplicationTitle>
     </PropertyGroup>
 
     <!-- Target needed until LinkWithSwiftSystemLibraries makes it into the SDK: https://github.com/xamarin/xamarin-macios/pull/20463 -->
