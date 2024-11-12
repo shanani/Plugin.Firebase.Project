@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
 		<TargetFrameworks>net8.0-android;net8.0-ios</TargetFrameworks>
@@ -36,6 +36,10 @@
         <PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
         <PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="$(MauiVersion)" />
         <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
+        <PackageReference Include="Plugin.Firebase" Version="3.1.1" />
+        <PackageReference Include="Plugin.Firebase.Auth.Facebook" Version="3.1.0" />
+        <PackageReference Include="Plugin.Firebase.Auth.Google" Version="3.1.0" />
+        <PackageReference Include="Xamarin.Firebase.iOS.Core" Version="8.10.0.3" />
     </ItemGroup>
 
     <!-- localization -->
@@ -58,13 +62,9 @@
     <PropertyGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">
         <CodesignEntitlements>Platforms\iOS\Entitlements.plist</CodesignEntitlements>
     </PropertyGroup>
+    
 
     <!-- project references -->
-    <ItemGroup>
-        <ProjectReference Include="..\..\src\Bundled\Bundled.csproj" />
-        <ProjectReference Include="..\..\src\Auth.Facebook\Auth.Facebook.csproj" />
-        <ProjectReference Include="..\..\src\Auth.Google\Auth.Google.csproj" />
-    </ItemGroup>
 
     <!-- nuget packages -->
     <ItemGroup>
@@ -80,14 +80,6 @@
     <ItemGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">
     </ItemGroup>
 
-    <ItemGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">
-        <PackageReference Include="Xamarin.AndroidX.Core" Version="1.12.0.2" />
-        <PackageReference Include="Xamarin.AndroidX.Collection" Version="1.3.0.1" />
-        <PackageReference Include="Xamarin.AndroidX.Collection.Ktx" Version="1.3.0.1" />
-        <PackageReference Include="Xamarin.AndroidX.Activity.Ktx" Version="1.8.0.1" />
-        <PackageReference Include="Xamarin.AndroidX.Browser" Version="1.6.0.2" />
-    </ItemGroup>
-
     <!-- platform assets -->
     <ItemGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">
         <GoogleServicesJson Include="google-services.json" />
@@ -97,6 +89,17 @@
         <BundleResource Include="GoogleService-Info.plist" />
     </ItemGroup>
 
+    <ItemGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">
+        
+        <PackageReference Include="Xamarin.AndroidX.Core" Version="1.15.0.1" />
+        <PackageReference Include="Xamarin.AndroidX.Collection" Version="1.4.5.1" />
+        <PackageReference Include="Xamarin.AndroidX.Collection.Ktx" Version="1.4.5.1" />
+        <PackageReference Include="Xamarin.AndroidX.Activity.Ktx" Version="1.9.3.1" />
+        <PackageReference Include="Xamarin.AndroidX.Browser" Version="1.8.0.7" />
+        <PackageReference Include="Xamarin.AndroidX.Lifecycle.LiveData.Core" Version="2.8.7.1" />
+        <PackageReference Include="Xamarin.AndroidX.Lifecycle.LiveData.Core.Ktx" Version="2.8.7.1" />
+    </ItemGroup>
+    
     <!-- needed for android build to work -->
     <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0-android|AnyCPU'">
       <EmbedAssembliesIntoApk>False</EmbedAssembliesIntoApk>

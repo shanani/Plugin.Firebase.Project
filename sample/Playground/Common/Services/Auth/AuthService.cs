@@ -1,8 +1,9 @@
 using System.Reactive.Subjects;
+ 
 using Plugin.Firebase.Auth;
 using Plugin.Firebase.Auth.Facebook;
 using Plugin.Firebase.Auth.Google;
-
+ 
 namespace Playground.Common.Services.Auth;
 
 public sealed class AuthService : IAuthService
